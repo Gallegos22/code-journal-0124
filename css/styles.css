@@ -13,18 +13,19 @@ img {
 }
 
 header {
-  background-color: purple;
+  background-color: rgb(83, 11, 83);
 }
 
 .row {
   display: flex;
 }
 
-.column-half {
-  flex-basis: 50%;
+input {
+  width: 100%;
+  height: 36px;
+  border-radius: 5px;
 }
 
-input,
 textarea {
   width: 100%;
 }
@@ -32,4 +33,13 @@ textarea {
 .submit {
   display: flex;
   justify-content: end;
+}
+
+button {
+  color: white;
+  background-color: rgb(83, 11, 83);
+  border-radius: 6px;
+  font-size: 15px;
+  padding: 6px;
+  margin-top: 12px;
 }
