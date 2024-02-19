@@ -1,3 +1,11 @@
+body {
+  background-color: rgb(236, 234, 234);
+}
+
+img {
+  width: 100%;
+}
+
 .heading {
   display: flex;
   color: white;
@@ -6,4 +14,22 @@
 
 header {
   background-color: purple;
+}
+
+.row {
+  display: flex;
+}
+
+.column-half {
+  flex-basis: 50%;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+.submit {
+  display: flex;
+  justify-content: end;
 }
