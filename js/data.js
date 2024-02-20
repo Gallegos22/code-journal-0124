@@ -5,9 +5,7 @@ let data = {
   editing: null,
   nextEntryId: 1,
 };
-console.log(data);
 window.addEventListener('beforeunload', () => {
-  console.log('Event Fired');
   const dataJSON = JSON.stringify(data);
   localStorage.setItem('javascript-local-storage', dataJSON);
 });
