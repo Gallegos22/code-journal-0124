@@ -1,7 +1,13 @@
+interface FormElements extends HTMLFormControlsCollection {
+  title: HTMLInputElement;
+  photoUrl: HTMLInputElement;
+  notes: HTMLTextAreaElement;
+}
+
 interface Entry {
   entryId: number;
   title: string;
-  imageUrl: string;
+  photoUrl: string;
   notes: string;
 }
 
@@ -19,6 +25,7 @@ $photoURL?.addEventListener('input', (event: Event) => {
 });
 
 const $form = document.querySelector('#form') as HTMLFormElement;
+console.log('$form:', $form);
 
 if (!$form) throw new Error('The $form query failed');
 
@@ -32,26 +39,21 @@ if (!$notes) throw new Error('The $notes query failed');
 
 $form.addEventListener('submit', (event: Event) => {
   event.preventDefault();
-
-  const $form = document.querySelector('#form') as HTMLFormElement;
-
+  console.dir('$form.elements:', $form);
+  const eventTarget = event.target as HTMLFormElement;
+  const $formElements = eventTarget.elements as FormElements;
+  console.log('forElements:', $formElements);
   const newData: Entry = {
-    title: $form.$title.value,
-    imageUrl: $form.$image.src,
-    notes: $form.$notes.value,
-    entryId: $form.data.nextEntryId,
+    title: $formElements.title.value,
+    photoUrl: $formElements.photoUrl.value,
+    notes: $formElements.notes.value,
+    entryId: data.nextEntryId,
   };
-
+  console.log('new data', newData);
   data.nextEntryId++;
   data.entries.unshift(newData);
 
-  const image = document.getElementById('placeholder-img') as HTMLFormElement;
-  image.src = '/images/placeholder-image-square.jpg';
+  $image.src = './images/placeholder-image-square.jpg';
 
-  if (!image) throw new Error('The image query failed');
-
-  const form = document.querySelector('#myForm') as HTMLFormElement;
-
-  if (!form) throw new Error('The form query failed');
-  form.reset();
+  $form.reset();
 });

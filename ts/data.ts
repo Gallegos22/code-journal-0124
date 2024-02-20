@@ -6,7 +6,7 @@ interface Data {
   nextEntryId: number;
 }
 
-const data: Data = {
+let data: Data = {
   view: 'entry-form',
   entries: [],
   editing: null,
@@ -16,6 +16,13 @@ const data: Data = {
 console.log(data);
 
 window.addEventListener('beforeunload', () => {
+  console.log('Event Fired');
   const dataJSON = JSON.stringify(data);
   localStorage.setItem('javascript-local-storage', dataJSON);
 });
+
+const previousDataJSON = localStorage.getItem('javascript-local-storage');
+
+if (previousDataJSON != null) {
+  data = JSON.parse(previousDataJSON);
+}
