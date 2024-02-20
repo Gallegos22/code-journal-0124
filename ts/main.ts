@@ -25,7 +25,7 @@ $photoURL?.addEventListener('input', (event: Event) => {
 });
 
 const $form = document.querySelector('#form') as HTMLFormElement;
-console.log('$form:', $form);
+console.log('$form: ', $form);
 
 if (!$form) throw new Error('The $form query failed');
 
