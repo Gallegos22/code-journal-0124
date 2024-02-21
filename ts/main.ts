@@ -98,3 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
     $unorderedList?.append(renderEntry(data.entries[i])); // Need more clarification for this step
   }
 });
+
+const $listedItem = document.querySelector('li');
+
+function toggleNoEntries(): void {
+  if (!$listedItem) throw new Error('The $listedItem query failed');
+
+  if (data.entries.length === 0) {
+    $listedItem.className = ' hidden';
+  } else {
+    $listedItem.className = ' ';
+  }
+}
+
+console.log(toggleNoEntries);
