@@ -133,3 +133,19 @@ function viewSwap(view: any): void {
 }
 
 console.log(viewSwap);
+
+const $entriesTag = document.querySelector('.entriesTag');
+
+if (!$entriesTag) throw new Error('The $anchorTag query failed');
+
+$entriesTag.addEventListener('click', function () {
+  viewSwap('entries');
+});
+
+// const $newButton = document.querySelector('.new-button');
+
+// if (!$newButton) throw new Error ('The $newButton query failed');
+
+// $newButton.addEventListener('click', function () {
+//   viewSwap('entry-form')
+// })
