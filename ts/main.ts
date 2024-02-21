@@ -112,3 +112,24 @@ function toggleNoEntries(): void {
 }
 
 console.log(toggleNoEntries);
+
+function viewSwap(view: any): void {
+  const $entryForm = document.querySelector('.entry-form');
+
+  if (!$entryForm) throw new Error('The $entryForm query failed');
+
+  const $entries = document.querySelector('.entries');
+
+  if (!$entries) throw new Error('The $entries query failed');
+
+  if (view === 'entries') {
+    $entryForm.classList.add('hidden');
+    $entries.classList.remove('hidden');
+  } else if (view === 'entry-form') {
+    $entries.classList.add('hidden');
+    $entryForm.classList.remove('hidden');
+  }
+  data.view = view;
+}
+
+console.log(viewSwap);
