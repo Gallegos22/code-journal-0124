@@ -53,10 +53,11 @@ ul {
   background-color: rgb(83, 11, 83);
   border-radius: 6px;
   font-size: 15px;
-  margin-top: 12px;
   font-family: 'Times New Roman', Times, serif;
+  height: fit-content;
 }
 
 .entrie-column {
   justify-content: space-between;
+  align-items: center;
 }
