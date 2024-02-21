@@ -142,10 +142,10 @@ $entriesTag.addEventListener('click', function () {
   viewSwap('entries');
 });
 
-// const $newButton = document.querySelector('.new-button');
+const $newButton = document.querySelector('.new-button');
 
-// if (!$newButton) throw new Error ('The $newButton query failed');
+if (!$newButton) throw new Error('The $newButton query failed');
 
-// $newButton.addEventListener('click', function () {
-//   viewSwap('entry-form')
-// })
+$newButton.addEventListener('click', function () {
+  viewSwap('entry-form');
+});
