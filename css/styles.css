@@ -35,7 +35,7 @@ textarea {
   justify-content: end;
 }
 
-button {
+.save-button {
   color: white;
   background-color: rgb(83, 11, 83);
   border-radius: 6px;
@@ -48,17 +48,15 @@ ul {
   list-style: none;
 }
 
-.new {
-  display: flex;
-  justify-content: end;
-}
-
 .new-button {
   color: white;
   background-color: rgb(83, 11, 83);
   border-radius: 6px;
   font-size: 15px;
-  padding: 6px 12px;
   margin-top: 12px;
   font-family: 'Times New Roman', Times, serif;
+}
+
+.entrie-column {
+  justify-content: space-between;
 }
