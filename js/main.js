@@ -29,7 +29,7 @@ $form.addEventListener('submit', (event) => {
   $form.reset();
 });
 function renderEntry(entry) {
-  console.log(entry);
+  const li = document.createElement('li');
   const row = document.createElement('div');
   row.setAttribute('class', 'row');
   const colOneHalf = document.createElement('div');
@@ -47,7 +47,14 @@ function renderEntry(entry) {
   const paragraph = document.createElement('p');
   paragraph.textContent = entry.notes;
   colOneHalf2.append(paragraph);
-  return colOneHalf;
+  li.append(row);
+  return li;
 }
 console.log(renderEntry);
-console.log('hello');
+const $unorderedList = document.querySelector('ul');
+if (!$unorderedList) throw new Error('The $unorderedList query failed');
+document.addEventListener('DOMContentLoaded', () => {
+  for (let i = 0; i < data.entries.length; i++) {
+    $unorderedList?.append(renderEntry(data.entries[i])); // Need more clarification for this step
+  }
+});

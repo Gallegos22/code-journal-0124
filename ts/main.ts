@@ -54,8 +54,9 @@ $form.addEventListener('submit', (event: Event) => {
   $form.reset();
 });
 
-function renderEntry(entry: Entry): HTMLDivElement {
-  console.log(entry);
+function renderEntry(entry: Entry): HTMLLIElement {
+  const li = document.createElement('li');
+
   const row = document.createElement('div');
   row.setAttribute('class', 'row');
 
@@ -81,8 +82,19 @@ function renderEntry(entry: Entry): HTMLDivElement {
 
   colOneHalf2.append(paragraph);
 
-  return colOneHalf;
+  li.append(row);
+
+  return li;
 }
 
 console.log(renderEntry);
-console.log('hello');
+
+const $unorderedList = document.querySelector('ul');
+
+if (!$unorderedList) throw new Error('The $unorderedList query failed');
+
+document.addEventListener('DOMContentLoaded', () => {
+  for (let i = 0; i < data.entries.length; i++) {
+    $unorderedList?.append(renderEntry(data.entries[i])); // Need more clarification for this step
+  }
+});
