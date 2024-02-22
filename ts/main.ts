@@ -104,7 +104,7 @@ if (!$unorderedList) throw new Error('The $unorderedList query failed');
 document.addEventListener('DOMContentLoaded', () => {
   viewSwap(data.view);
 
-  // toggleNoEntries()
+  toggleNoEntries();
 
   for (let i = 0; i < data.entries.length; i++) {
     $unorderedList?.append(renderEntry(data.entries[i])); // Need more clarification for this step
