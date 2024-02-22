@@ -51,6 +51,14 @@ $form.addEventListener('submit', (event: Event) => {
 
   $image.src = './images/placeholder-image-square.jpg';
 
+  renderEntry(newData);
+
+  $unorderedList?.prepend(renderEntry(newData));
+
+  viewSwap('entries');
+
+  toggleNoEntries();
+
   $form.reset();
 });
 
@@ -99,15 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-const $listedItem = document.querySelector('li');
-
 function toggleNoEntries(): void {
-  if (!$listedItem) throw new Error('The $listedItem query failed');
+  const $noEntry = document.querySelector('.no-entries');
+
+  if (!$noEntry) throw new Error('The $noEntry query failed');
 
   if (data.entries.length === 0) {
-    $listedItem.className = ' hidden';
+    $noEntry?.classList.remove('no-entries');
   } else {
-    $listedItem.className = ' ';
+    $noEntry?.classList.add('no-entries');
   }
 }
 

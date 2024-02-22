@@ -55,9 +55,22 @@ ul {
   font-size: 15px;
   font-family: 'Times New Roman', Times, serif;
   height: fit-content;
+  padding: 6px;
+  text-decoration: none;
 }
 
 .entrie-column {
   justify-content: space-between;
   align-items: center;
+}
+
+.entriesTag {
+  text-decoration: none;
+  font-size: 18px;
+  padding-left: 14px;
+  color: white;
+}
+
+.no-entries {
+  display: none;
 }
