@@ -34,6 +34,7 @@ $form.addEventListener('submit', (event) => {
 });
 function renderEntry(entry) {
   const li = document.createElement('li');
+  li.setAttribute('data-entry-id', entry.entryId.toString());
   const row = document.createElement('div');
   row.setAttribute('class', 'row');
   const colOneHalf = document.createElement('div');
@@ -45,8 +46,14 @@ function renderEntry(entry) {
   const colOneHalf2 = document.createElement('div');
   colOneHalf2.setAttribute('class', 'column-half');
   row.append(colOneHalf2);
+  const heading3Container = document.createElement('div');
+  heading3Container.setAttribute('class', 'heading3');
+  row.append(heading3Container);
   const heading3 = document.createElement('h3');
   heading3.textContent = entry.title;
+  heading3Container.append(heading3);
+  const fontIcon = document.createElement('i');
+  fontIcon.setAttribute('class', 'fa-solid fa-pencil');
   colOneHalf2.append(heading3);
   const paragraph = document.createElement('p');
   paragraph.textContent = entry.notes;
