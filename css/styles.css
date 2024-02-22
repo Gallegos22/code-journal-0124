@@ -35,11 +35,46 @@ textarea {
   justify-content: end;
 }
 
-button {
+.save-button {
   color: white;
   background-color: rgb(83, 11, 83);
   border-radius: 6px;
   font-size: 15px;
   padding: 6px;
   margin-top: 12px;
+}
+
+ul {
+  list-style: none;
+}
+
+.new-button {
+  color: white;
+  background-color: rgb(83, 11, 83);
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: 'Times New Roman', Times, serif;
+  height: fit-content;
+  padding: 6px;
+  text-decoration: none;
+}
+
+.entrie-column {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entriesTag {
+  text-decoration: none;
+  font-size: 18px;
+  padding-left: 14px;
+  color: white;
+}
+
+.no-entries {
+  display: none;
+}
+
+.entryHeading {
+  margin-left: 12px;
 }
