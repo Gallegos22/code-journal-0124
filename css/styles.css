@@ -78,3 +78,12 @@ ul {
 .entryHeading {
   margin-left: 12px;
 }
+
+h3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+i:hover {
+  cursor: pointer;
+}
