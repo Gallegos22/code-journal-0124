@@ -1,18 +1,25 @@
 'use strict';
+const $noEntry = document.querySelector('#no-entries');
 const $photoURL = document.querySelector('#photo-url');
-if (!$photoURL) throw new Error('The $photoURL query failed');
 const $image = document.querySelector('img');
+const $form = document.querySelector('#form');
+const $notes = document.querySelector('#notes');
+const $unorderedList = document.querySelector('ul');
+const $entriesTag = document.querySelector('.entriesTag');
+const $newButton = document.querySelector('.new-button');
+if (!$noEntry) throw new Error('The $noEntry query failed');
+if (!$photoURL) throw new Error('The $photoURL query failed');
 if (!$image) throw new Error('The $image query failed');
+if (!$form) throw new Error('The $form query failed');
+if (!$notes) throw new Error('The $notes query failed');
+if (!$unorderedList) throw new Error('The $unorderedList query failed');
+if (!$entriesTag) throw new Error('The $anchorTag query failed');
+if (!$newButton) throw new Error('The $newButton query failed');
 $photoURL?.addEventListener('input', (event) => {
   const $eventTarget = event.target;
   $image.src = $eventTarget.value;
+  console.log('input event listener line 36');
 });
-const $form = document.querySelector('#form');
-if (!$form) throw new Error('The $form query failed');
-const $title = document.querySelector('#title-box');
-if (!$title) throw new Error('#title-box');
-const $notes = document.querySelector('#notes');
-if (!$notes) throw new Error('The $notes query failed');
 $form.addEventListener('submit', (event) => {
   event.preventDefault();
   const eventTarget = event.target;
@@ -23,18 +30,51 @@ $form.addEventListener('submit', (event) => {
     notes: $formElements.notes.value,
     entryId: data.nextEntryId,
   };
-  data.nextEntryId++;
-  data.entries.unshift(newData);
+  console.log('submit event listener line 42');
+  if (data.editing === null) {
+    data.nextEntryId++;
+    data.entries.unshift(newData);
+    $unorderedList?.prepend(renderEntry(newData));
+  } else {
+    newData.entryId = data.editing.entryId; // update the newData entryID  before preceding
+    let newEntries = [];
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === newData.entryId) {
+        newEntries.push(newData);
+      } else {
+        newEntries.push(data.entries[i]);
+      }
+    }
+    data.entries = newEntries;
+    // data.entries = data.entries.map((entry) => {
+    //   if (entry.entryId === newData.entryId) {
+    //     return newData
+    //   } else {
+    //     return entry
+    //   }
+    // })
+    const $listedItem = document.querySelectorAll('li');
+    if (!$listedItem) throw new Error('The $listedItem query failed');
+    for (const li of $listedItem) {
+      // creating a variable for every li inside my listed item
+      if (Number(li.getAttribute('data-entry-id')) === data.editing.entryId) {
+        // using the number method to convert the attribute of 'data-entry-id' to a number so we can compare it to our data.editing.entryId
+        li.replaceWith(renderEntry(newData)); // replace our old li with updated/ edited one
+      }
+      const $heading2 = document.querySelector('.new-entry-header');
+      if (!$heading2) throw new Error('The $heading2 query failed');
+      $heading2.textContent = 'New Entry';
+    }
+    data.editing = null;
+  }
   $image.src = './images/placeholder-image-square.jpg';
-  renderEntry(newData);
-  $unorderedList?.prepend(renderEntry(newData));
+  $form.reset();
   viewSwap('entries');
   toggleNoEntries();
-  $form.reset();
 });
 function renderEntry(entry) {
   const li = document.createElement('li');
-  li.setAttribute('data-entry-id', entry.entryId.toString());
+  li.setAttribute('data-entry-id', entry.entryId.toString()); // we need to know what entry we click on when clicking on pencil icon,
   const row = document.createElement('div');
   row.setAttribute('class', 'row');
   const colOneHalf = document.createElement('div');
@@ -62,9 +102,8 @@ function renderEntry(entry) {
   return li;
 }
 console.log(renderEntry);
-const $unorderedList = document.querySelector('ul');
-if (!$unorderedList) throw new Error('The $unorderedList query failed');
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContent listener line 139');
   viewSwap(data.view);
   toggleNoEntries();
   for (let i = 0; i < data.entries.length; i++) {
@@ -72,8 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 function toggleNoEntries() {
-  const $noEntry = document.querySelector('.no-entries');
-  if (!$noEntry) throw new Error('The $noEntry query failed');
   if (data.entries.length === 0) {
     $noEntry?.classList.remove('no-entries');
   } else {
@@ -96,14 +133,12 @@ function viewSwap(view) {
   data.view = view;
 }
 console.log(viewSwap);
-const $entriesTag = document.querySelector('.entriesTag');
-if (!$entriesTag) throw new Error('The $anchorTag query failed');
 $entriesTag.addEventListener('click', function () {
+  console.log('line 183');
   viewSwap('entries');
 });
-const $newButton = document.querySelector('.new-button');
-if (!$newButton) throw new Error('The $newButton query failed');
 $newButton.addEventListener('click', function () {
+  console.log('line 187');
   viewSwap('entry-form');
 });
 // target ul with class of .entry-list
@@ -111,6 +146,7 @@ const $entryList = document.querySelector('.entry-list');
 if (!$entryList) throw new Error('$entryList is null');
 // Add an event listener to $entryList for click events.
 $entryList.addEventListener('click', (event) => {
+  console.log('line 196');
   // Cast the event target to an HTMLElement for further operations.
   const $eventTarget = event.target;
   // If the event target is not an icon (denoted by 'I'), exit the function early.
@@ -128,19 +164,23 @@ $entryList.addEventListener('click', (event) => {
   // Iterate over the entries in the data object to find the one that matches the entry ID.
   for (let i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === entryId) {
+      console.log('test');
       // If a match is found, set the global editing object to the current entry.
       data.editing = data.entries[i];
     }
   }
+  viewSwap('entry-form');
   const $newEntryHeader = document.querySelector('.new-entry-header');
   if (!$newEntryHeader) throw new Error('The $newEntryHeader query failed');
-  const $formImage = document.querySelector('.image');
-  if (!$formImage) throw new Error('The $formImage query failed');
+  const $image = document.querySelector('img');
+  if (!$image) throw new Error('The $formImage query failed');
+  const $title = document.querySelector('#title-box');
+  if (!$title) throw new Error('#title-box');
   // If there is an entry being edited (data.editing is not null),
   if (data.editing) {
     // Check if required elements are not null, otherwise throw an error.
     if (
-      !$formImage ||
+      !$image ||
       // !$deleteBtn ||
       !$title ||
       !$notes ||
@@ -151,7 +191,7 @@ $entryList.addEventListener('click', (event) => {
       );
     }
     // Set the form image source to the editing entry's photo URL.
-    $formImage.setAttribute('src', data.editing.photoUrl);
+    $image.setAttribute('src', data.editing.photoUrl);
     // Set the entry title input value to the editing entry's title.
     $title.value = data.editing.title;
     // Set the photo URL input value to the editing entry's photo URL.
