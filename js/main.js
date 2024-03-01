@@ -1,5 +1,5 @@
 'use strict';
-const $noEntry = document.querySelector('#no-entries');
+const $noEntry = document.querySelector('#no-entries'); //query selecting variables so we can call to the DOM
 const $photoURL = document.querySelector('#photo-url');
 const $image = document.querySelector('img');
 const $form = document.querySelector('#form');
@@ -16,6 +16,7 @@ if (!$unorderedList) throw new Error('The $unorderedList query failed');
 if (!$entriesTag) throw new Error('The $anchorTag query failed');
 if (!$newButton) throw new Error('The $newButton query failed');
 $photoURL?.addEventListener('input', (event) => {
+  // adding an event listener on our
   const $eventTarget = event.target;
   $image.src = $eventTarget.value;
   console.log('input event listener line 36');
@@ -37,7 +38,7 @@ $form.addEventListener('submit', (event) => {
     $unorderedList?.prepend(renderEntry(newData));
   } else {
     newData.entryId = data.editing.entryId; // update the newData entryID  before preceding
-    let newEntries = [];
+    const newEntries = [];
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === newData.entryId) {
         newEntries.push(newData);
@@ -46,13 +47,6 @@ $form.addEventListener('submit', (event) => {
       }
     }
     data.entries = newEntries;
-    // data.entries = data.entries.map((entry) => {
-    //   if (entry.entryId === newData.entryId) {
-    //     return newData
-    //   } else {
-    //     return entry
-    //   }
-    // })
     const $listedItem = document.querySelectorAll('li');
     if (!$listedItem) throw new Error('The $listedItem query failed');
     for (const li of $listedItem) {
@@ -134,11 +128,9 @@ function viewSwap(view) {
 }
 console.log(viewSwap);
 $entriesTag.addEventListener('click', function () {
-  console.log('line 183');
   viewSwap('entries');
 });
 $newButton.addEventListener('click', function () {
-  console.log('line 187');
   viewSwap('entry-form');
 });
 // target ul with class of .entry-list
@@ -146,7 +138,6 @@ const $entryList = document.querySelector('.entry-list');
 if (!$entryList) throw new Error('$entryList is null');
 // Add an event listener to $entryList for click events.
 $entryList.addEventListener('click', (event) => {
-  console.log('line 196');
   // Cast the event target to an HTMLElement for further operations.
   const $eventTarget = event.target;
   // If the event target is not an icon (denoted by 'I'), exit the function early.

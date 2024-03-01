@@ -5,13 +5,14 @@ interface FormElements extends HTMLFormControlsCollection {
 }
 
 interface Entry {
+  // creating an interface so we can attach to our newData object that will hold our new entries
   entryId: number;
   title: string;
   photoUrl: string;
   notes: string;
 }
 
-const $noEntry = document.querySelector('#no-entries');
+const $noEntry = document.querySelector('#no-entries'); // query selecting variables so we can call to the DOM
 const $photoURL = document.querySelector('#photo-url') as HTMLFormElement;
 const $image = document.querySelector('img');
 const $form = document.querySelector('#form') as HTMLFormElement;
@@ -63,13 +64,6 @@ $form.addEventListener('submit', (event: Event) => {
       }
     }
     data.entries = newEntries;
-    // data.entries = data.entries.map((entry) => {
-    //   if (entry.entryId === newData.entryId) {
-    //     return newData
-    //   } else {
-    //     return entry
-    //   }
-    // })
 
     const $listedItem = document.querySelectorAll('li');
     if (!$listedItem) throw new Error('The $listedItem query failed');
@@ -188,12 +182,10 @@ function viewSwap(view: any): void {
 console.log(viewSwap);
 
 $entriesTag.addEventListener('click', function () {
-  console.log('line 183');
   viewSwap('entries');
 });
 
 $newButton.addEventListener('click', function () {
-  console.log('line 187');
   viewSwap('entry-form');
 });
 
@@ -202,7 +194,6 @@ const $entryList = document.querySelector('.entry-list');
 if (!$entryList) throw new Error('$entryList is null');
 // Add an event listener to $entryList for click events.
 $entryList.addEventListener('click', (event: Event) => {
-  console.log('line 196');
   // Cast the event target to an HTMLElement for further operations.
   const $eventTarget = event.target as HTMLElement;
 
